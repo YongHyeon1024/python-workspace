@@ -1,0 +1,80 @@
+{% extends "template1.html" %}
+{% block head %}{% endblock %}
+{% block title %}page1{% endblock %}
+{% block leftbody %}{% endblock %}
+{% block body %}
+	<table class="table table-hover">
+		<thead>
+			<tr>
+			<th scope="col">이름</th>
+			<th scope="col">성별</th>
+			<th scope="col">이메일</th>
+			<th scope="col">생년</th>
+			<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for data in result %}
+				<form action="/customertable" method="POST">
+					<tr>
+					<th scope="row">
+						<input type="text" class="form-control" name="name" value="{{ data.name }}" placeholder="이름" required>
+					</th>
+					<td>
+						<input type="text" class="form-control" name="gender" value="{{ data.gender }}" placeholder="성별" required>
+					</td>
+					<td>
+						<input type="text" class="form-control" name="email" value="{{ data.email }}" placeholder="이메일"" required>
+					</td>
+					<td>
+						<input type="text" class="form-control" name="birthyear" value="{{ data.birthyear }}" placeholder="생년" required>
+					</td>
+					<td>
+						<button id="update{{ loop.index }}" class="btn btn-primary" type="submit" name="button" value="U">수정</button>
+						<button id="delete{{ loop.index }}" class="btn btn-primary" type="submit" name="button" value="D">삭제</button>
+					</td>
+					</tr>
+				</form>
+			{% endfor %}
+		</tbody>
+	</table>
+	<form class="was-validated" action="/customertable" method="POST">
+		<div class="form-row">
+			<div class="col-md-3">
+				<label for="validationDefault1">이름</label>
+				<input type="text" class="form-control" id="validationDefault1" name="name" placeholder="이름" required>
+			</div>
+			<div class="col-md-1">
+				<label for="validationDefault2">성별</label>
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input" id="customControlValidation2" name="gender" value="M" required>
+					<label class="custom-control-label" for="customControlValidation2">남</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input" id="customControlValidation3" name="gender" value="F" required>
+					<label class="custom-control-label" for="customControlValidation3">여</label>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<label for="validationDefault3">이메일</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroupPrepend2">@</span>
+					</div>
+					<input type="text" class="form-control" id="validationDefault3" name="email" placeholder="이메일" aria-describedby="inputGroupPrepend2" required>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label for="validationDefault4">생년</label>
+				<input type="text" class="form-control" id="validationDefault4" name="birthyear" placeholder="생년" required>
+			</div>
+		</div>
+		<button class="btn btn-primary" type="submit" style="position: absolute; right: 0;" name="button" value="I">추가</button>
+	</form>
+{% endblock %}
+{% block rightbody %}{% endblock %}
+{% block bottom %}
+	<script>
+		$("#tab2").addClass("active");
+	</script>
+{% endblock %}
